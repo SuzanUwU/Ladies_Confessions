@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8" />
+  <title>Update Confirmation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    :root {
+    --primary-pink: #e75480;
+    --secondary-pink: #fe80b2;
+    --soft-pink: #fec9de;
+    --background: #fefefe;
+    --text-dark: #333333;
+    --button-shadow: rgba(231, 84, 128, 0.5);
+    --error-pink: #e0245e;
+    }
+
+    body {
+    font-family: 'Noto Sans Myanmar', sans-serif;
+    background-image: url("{{ url_for('static', filename='background.png') }}");
+    background-color: rgba(0, 0, 0, 0.4); /* black with 40% opacity */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: var(--text-dark);
+    }
+
+    .container {
+    background: var(--background);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px var(--button-shadow);
+    max-width: 400px;
+    text-align: center;
+    }
+
+    button {
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--primary-pink);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px var(--button-shadow);
+    transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+    background-color: var(--secondary-pink);
+    }
+
+    button.no {
+    background-color: var(--error-pink);
+    }
+
+    button.no:hover {
+    background-color: #c81e54; /* slightly darker for hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p>သင်အရင်post တင်တဲ့အချိန်မှာ နာမည်တု nickname သို့မဟုတ် အကျဉ်းချုပ်ခေါင်းစဉ် တပ်ခဲ့ပါသလား။</p>
+    <form method="post">
+      <button type="submit" name="answer" value="yes">Yes</button>
+      <button type="submit" name="answer" value="no" class="no">No</button>
+    </form>
+  </div>
+</body>
+</html>

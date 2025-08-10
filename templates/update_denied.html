@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8" />
+  <title>Update Denied</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    :root {
+    --primary-pink: #e75480;
+    --secondary-pink: #fe80b2;
+    --soft-pink: #fec9de;
+    --background: #fefefe;
+    --text-dark: #333333;
+    --text-muted: #555555;
+    --button-shadow: rgba(255, 44, 128, 0.5);
+    }
+
+    body {
+    font-family: 'Noto Sans Myanmar', sans-serif;
+    background-image: url("{{ url_for('static', filename='background.png') }}");
+    background-color: rgba(0, 0, 0, 0.4); /* black with 40% opacity */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: var(--text-dark);
+    }
+
+    .container {
+    background: var(--background);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px var(--button-shadow);
+    max-width: 400px;
+    text-align: center;
+    }
+
+    button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--primary-pink);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px var(--button-shadow);
+    transition: background-color 0.3s ease;
+    }
+    button:hover {
+    background-color: var(--secondary-pink);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p>တောင်းပန်ပါတယ်၊ အလိမ်အညာ update တင်ခြင်းကနေရှောင်ရှားဖို့အတွက် သင့်တင်သွင်းမှုကို လက်မခံပါ။</p>
+    <button onclick="window.location.href='/'">Back</button>
+  </div>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ရင်ဖွင့်မှု စာတမ်းပို့ရန်</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar&display=swap" rel="stylesheet" />
+
+  <style>
+  :root {
+    --primary-pink: #e75480;
+    --secondary-pink: #fe80b2;
+    --soft-pink: #fec9de;
+    --background: #fefefe;
+    --text-dark: #333333;
+    --text-muted: #888888;
+    --button-shadow: rgba(231, 84, 128, 0.5);
+    --error-pink: #e0245e;
+    --bubble-color: #fff6f9; /* very soft pink background for form */
+    --bubble-shadow: rgba(231, 84, 128, 0.15);
+  }
+
+  body {
+    font-family: 'Noto Sans Myanmar', sans-serif;
+    background-image: url("{{ url_for('static', filename='background.png') }}");
+    background-color: rgba(0, 0, 0, 0.4); /* black with 40% opacity */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-dark);
+  }
+
+  main.container {
+    background: var(--bubble-color);
+    max-width: 480px;
+    width: 100%;
+    padding: 30px 28px;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px var(--bubble-shadow);
+    box-sizing: border-box;
+  }
+
+  .container {
+    background: var(--background);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px var(--button-shadow);
+    max-width: 400px;
+    text-align: center;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 18px;
+    color: var(--primary-pink);
+    line-height: 1.8;
+    text-align: center;
+  }
+
+  label {
+    display: block;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 6px;
+    font-size: 1rem;
+    color: var(--text-dark);
+  }
+
+  textarea, input[type="text"] {
+    width: 100%;
+    font-family: 'Noto Sans Myanmar', sans-serif;
+    font-size: 1rem;
+    padding: 12px 14px;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    box-sizing: border-box;
+    resize: vertical;
+    min-height: 140px;
+    transition: border-color 0.3s ease;
+  }
+  input[type="text"] {
+    min-height: auto;
+  }
+  textarea:focus, input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary-pink);
+    box-shadow: 0 0 6px var(--secondary-pink);
+  }
+
+  .optional {
+    font-weight: normal;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .note {
+    margin-top: 8px;
+    font-size: 1rem;
+    color: var(--primary-pink);
+    font-weight: 600;
+  }
+
+  button {
+    font-family: 'Noto Sans Myanmar', sans-serif;
+    background-color: var(--primary-pink);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px var(--button-shadow);
+    margin-top: 28px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  button.enabled {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  button:hover.enabled {
+    background-color: var(--secondary-pink);
+  }
+
+  .error {
+    color: var(--error-pink);
+    font-weight: 600;
+    margin-top: 6px;
+  }
+
+  @media (max-width: 520px) {
+    main.container {
+      padding: 24px 20px;
+    }
+    h1 {
+      font-size: 1.4rem;
+    }
+    label {
+      font-size: 1rem;
+    }
+    textarea, input[type="text"] {
+      font-size: 1rem;
+    }
+    button {
+      font-size: 1rem;
+      padding: 12px 26px;
+    }
+  }
+</style>
+
+</head>
+<body>
+  <main class="container">
+    <h1>မိန်းမသားတို့ရင်ဖွင့်ရာ</h1>
+    {% if is_update %}
+        <p style="color: #e75480; font-weight:700;">ဒီ form သည် သင်အရင်က ရင့်ဖွင့်ထားသည့်အကြောင်းအရာကို update ရင်ဖွင့်ခြင်းအတွက်ဖြစ်ပါသည်</p>
+    {% endif %}
+
+    <form method="POST" action="/submit{% if is_update %}?is_update=true{% endif %}">
+      <input type="hidden" name="form_token" value="{{ form_token }}">
+      
+      <label for="struggle">သင်ရင်ဖွင့်ချင်တဲ့ အကြောင်းအရာကို ဒီမှာရေးပါ</label>
+      <textarea id="struggle" name="struggle" placeholder="ဒီမှာသင်ရင်ဖွင့်ချင်တာကို ရေးပါ..." required></textarea>
+
+      <label for="summary">သင့်post ကို အကျဉ်းချုပ် ခေါင်းစဉ်တပ်ချင်ရင် ထည့်ပေးပါ </label>
+      <input type="text" id="summary" name="summary" placeholder="ခေါင်းစဉ်ဖြည့်ရန်" maxlength="100" />
+
+      <label for="nickname">
+        {% if is_update %}
+            သင့်နာမည်တုကိုဖြည့်ပေးပါ <span style="color:red">*</span>
+        {% else %}
+            သင်နာမည်တုသုံးချင်ရင် ဒီမှာဖြည့်ပေးပါ <br>
+            နာမည်တုဖြည့်ခြင်းအားဖြင့် ဒီအကြောင်းအရာကိုပဲ နောက်ထပ် update ရင်ဖွင့်လို့ရနိုင်ပါတယ်။
+        {% endif %}
+      </label>
+      <input
+        type="text"
+        id="nickname"
+        name="nickname"
+        placeholder="{% if is_update %}နာမည်တုဖြည့်ရန်{% else %}နာမည်တုဖြည့်ရန် (optional){% endif %}"
+        maxlength="30"
+        {% if is_update %}required{% endif %}
+      />
+
+
+      <p id="instruction" class="note" style="display:none;">
+        ပြောပြချင်တဲ့ အကြောင်းအရာကို “Send” ခလုတ် နှိပ်ပြီး ပေးပို့နိုင်ပါပြီ။
+      </p>
+
+      <button type="submit" id="submitBtn" disabled>SEND</button>
+    </form>
+  </main>
+
+  <script>
+    const struggleTextarea = document.getElementById('struggle');
+    const submitBtn = document.getElementById('submitBtn');
+    const instruction = document.getElementById('instruction');
+
+    function countWords(text) {
+      return text.trim().split(/\s+/).filter(Boolean).length;
+    }
+
+    struggleTextarea.addEventListener('input', () => {
+      // count words for Burmese text (approx)
+      const wordsCount = struggleTextarea.value.trim().length; 
+      // For Burmese, length of string is better than splitting on spaces
+      if (wordsCount >= 250) {
+        submitBtn.disabled = false;
+        submitBtn.classList.add('enabled');
+        instruction.style.display = 'block';
+      } else {
+        submitBtn.disabled = true;
+        submitBtn.classList.remove('enabled');
+        instruction.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

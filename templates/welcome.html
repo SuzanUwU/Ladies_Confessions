@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>မိန်းမသားတို့ရင်ဖွင့်ရာ - ကြိုဆိုပါသည်</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary-pink: #e75480;
+      --secondary-pink: #fe80b2;
+      --soft-pink: #f7a8b8;
+      --background: #fefefe;
+      --text-dark: #333333;
+      --text-muted: #555555;
+      --button-shadow: rgba(255, 44, 128, 0.5);
+    }
+
+    body {
+      font-family: 'Noto Sans Myanmar', sans-serif;
+      background-image: url("{{ url_for('static', filename='background.png') }}");
+      background-color: rgba(0, 0, 0, 0.4); /* black with 40% opacity */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: var(--text-dark);
+    }
+
+    .container {
+      background: var(--background);
+      max-width: 480px;
+      width: 100%;
+      padding: 30px 28px;
+      border-radius: 18px;
+      box-shadow: 0 6px 18px var(--secondary-pink);
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+      color: var(--primary-pink);
+      line-height: 1.8;
+    }
+
+    p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 28px;
+      white-space: pre-line;
+    }
+
+    button {
+      font-family: 'Noto Sans Myanmar', sans-serif;
+      background-color: var(--primary-pink);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px var(--button-shadow);
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: var(--secondary-pink);
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        padding: 24px 20px;
+      }
+      h1 {
+        font-size: 1.4rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      button {
+        font-size: 1rem;
+        padding: 12px 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>မိန်းမသားတို့ရင်ဖွင့်ရာ <br>
+        website လေးကနေ ကြိုဆိုပါတယ်။</h1>
+    <p>
+      သင်ရင်ဖွင့်ချင်တဲ့ အကြောင်းအရာကို 
+      ဒီမှာလွတ်လွတ်လပ်လပ်ပြောပြလို့ရပါတယ်နော်။
+      သင့်ကိုယ်ရေးအချက်အလက် ဘာမှမတောင်းပဲ 
+      သင်ရင်ဖွင့်သမျှကို ဖတ်ပေးမှာပါ။<br>
+      Facebook Post တင်ဖြစ်မတင်ဖြစ်ကတော့
+      admin တွေရဲ့ ဆုံးဖြတ်ချက်ဖြစ်တယ်ဆိုတာ
+      နားလည်ပေးပါ။
+    </p>
+    <div class="button-row" style="display: flex; gap: 60px; justify-content: center; margin-top: 20px;">
+      <button onclick="window.location.href='/submit'">ရင်ဖွင့်မည်</button>
+      <button onclick="window.location.href='/update'">Update</button>
+    </div>
+  </main>
+</body>
+</html>
